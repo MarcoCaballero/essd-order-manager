@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Application",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "io.github.marcocaballero.Application",
+            "args": "",
+            "projectName": "order-manager-essd"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - OrderManagerEssdApplication",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "io.github.marcocaballero.OrderManagerEssdApplication",
+            "args": "",
+            "projectName": "order-manager-essd"
+        }
+    ]
+}

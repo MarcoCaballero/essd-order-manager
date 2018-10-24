@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Order Manager (MSC)</title>
+    <!-- Third Parties -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="css/modules/bootstrap.min.css" rel="stylesheet">
+    <link href="css/modules/mdb.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/nav-card.layout.css" rel="stylesheet">
+    <link href="css/style.effects.css" rel="stylesheet">
+    <link href="css/fav-buttons.layout.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar primary-color" nav-card-layout>
+        <div class="navbar-brand" href="#">
+            MSC - ESSD
+            <br>
+            <a class="back-button" href="/order-manager/orders" data-toggle="tooltip-secondary-scroll-inside" data-placement="bottom" title="Back Home">
+                <i class="fa fa-lg fa-angle-left" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="avatar ml-auto white">
+            <img src="https://pbs.twimg.com/profile_images/1051588814274224129/4X-41oJc_400x400.jpg" alt="marco caballero" class="avatar-mini img-fluid z-depth-1 rounded-circle">
+        </div>
+    </nav>
+
+    <!-- Projects section v.2 -->
+    <section class="view text-center my-5" mt-10>
+        <!-- Section heading -->
+        <h2 class="h1-responsive font-weight-bold my-5">{{order.title}}</h2>
+        <!-- Section description -->
+        <p class="grey-text w-responsive mx-auto mb-5">
+            Elements in the order, check or delete them.
+        </p>
+        <!-- Grid row -->
+        <div class="row d-flex justify-content-center">
+            <ul class="list-group list-group-flush list-spy list-spy-40" data-spy="scroll" data-offset="0">
+               {{#order.items}}
+                    <li class="list-group-item">
+                        <div class="custom-control custom-checkbox clearfix">
+                            <input type="checkbox" class="custom-control-input float-left" id="defaultUnchecked">
+                            <label class="custom-control-label float-left mt-2 ml-5" for="defaultUnchecked" padd-left>
+                                Element 1
+                            </label>
+                            <a href="#" class="btn btn-sm btn-danger float-right">Delete</a>
+                        </div>
+                    </li>
+                {{/order.items}}
+                {{^order.items}}
+                    <li class="list-group-item">
+                        <div class="custom-control custom-checkbox clearfix">
+                            <span>
+                                Empty
+                            </span>
+                        </div>
+                    </li> 
+                {{/order.items}}
+            </ul>
+
+        </div>
+        <!-- Grid row -->
+
+    </section>
+    <!-- Projects section v.2 -->
+
+
+    <!-- Footer -->
+    <footer class="page-footer font-small primary-color">
+
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            <a href="#">Ericsson - UPM</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+
+    <!-- FABS -->
+    <a fav-up href="order-form.html" class="btn btn-secondary fab-button waves-effect mt-3 scroll-with-nav" data-toggle="tooltip-secondary-scroll-inside" data-placement="bottom" title="Edit order">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+    </a>
+
+
+    <!-- 3rd parties -->
+    <script type="text/javascript" src="js/modules/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/modules/popper.min.js"></script>
+    <script type="text/javascript" src="js/modules/bootstrap.js"></script>
+    <script type="text/javascript" src="js/modules/mdb.min.js"></script>
+    <!-- Custom modules -->
+    <script type="text/javascript" src="js/common.module.js"></script>
+    <script type="text/javascript" src="js/animations-main.js"></script>
+    <!-- <script type="text/javascript" src="js/handler-main.js"></script> -->
+</body>
+
+</html>

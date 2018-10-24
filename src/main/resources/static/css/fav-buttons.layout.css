@@ -1,0 +1,44 @@
+.fab-button {
+    position: fixed;
+    border-radius: 50em;
+    -webkit-border-radius: 50em;
+    z-index: 1200;
+    height: 64.1px;
+    width: 26px !important;
+}
+
+.fab-button i.fa {
+    font-size: 1.5rem !important;
+    right: 7.9px;
+    top: 0.1em;
+}
+
+.fab-button i.fa.fa-send {
+    right: 11.9px !important;
+}
+
+.fab-button[fav-up] {
+    top: 79px;
+    right: 31px;
+}
+
+.fab-button[fav-down] {
+    bottom: 10px;
+    right: 10px;
+}
+
+.fab-button.scroll-with-nav {
+    -webkit-transition: .4s ease-in-out;
+    -moz-transition: .4s ease-in-out;
+    -o-transition: .4s ease-in-out;
+    transition: .4s ease-in-out;
+}
+
+.fab-button.scroll-with-nav.fab-collapse {
+    top: 55px !important;
+    transform: translateY(10px);
+    -webkit-transform: translateY(10px);
+    -moz-transform: translateY(10px);
+    -o-transform: translateY(10px);
+    -ms-transform: translateY(10px);
+}

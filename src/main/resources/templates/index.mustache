@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Order Manager (MSC)</title>
+    <!-- Third Parties -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="css/modules/bootstrap.min.css" rel="stylesheet">
+    <link href="css/modules/mdb.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style.effects.css" rel="stylesheet">
+    <link href="css/fav-buttons.layout.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar primary-color">
+        <a class="navbar-brand" href="#">
+            MSC - ESSD
+        </a>
+        <div class="avatar ml-auto white">
+            <img src="https://pbs.twimg.com/profile_images/1051588814274224129/4X-41oJc_400x400.jpg" alt="marco caballero" class="avatar-mini img-fluid z-depth-1 rounded-circle">
+        </div>
+    </nav>
+
+    <section class="view">
+        <div class="mask base-color d-flex justify-content-center align-items-center">
+            <div class="container">
+                <!-- ROW-->
+                <div id="homeSection" class="row pt-lg-5 mt-lg-5">
+                    <!-- COL-->
+                    <div class="col-md-12 text-md-center wow fadeInLeft justify-content-center align-items-center">
+                        <h1 class="animated fadeIn mb-4" primary-text-color>Order Manager</h1>
+                        <h5 class="animated fadeIn text-muted mb-2">Here you can manage the orders.</h5>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <p class="animated fadeIn text-muted mb-2">Available orders, click</p>
+                            <button id="go_to_orders_list_btn" class="btn btn-outline-primary btn-rounded waves-effect px-3">
+                                <i class="fa fa-arrow-down pr-2" aria-hidden="true"></i> Go!
+                             </button>
+                        </div>
+                    </div>
+                    <!-- ./COL-->
+                </div>
+                <!-- ./ROW-->
+            </div>
+        </div>
+    </section>
+
+    <section class="view">
+        <div class="mask base-color d-flex justify-content-center align-items-center">
+            <div class="container">
+                <!-- ROW-->
+                <div id="listSection" class="row justify-content-center">
+                    <!-- COL-->
+
+                    <div id="orders_title_div" class="col-md-12 text-md-center mr-6">
+                        <h2 class="animated fadeIn text-muted mb-3" primary-text-color>ORDERS</h2>
+                    </div>
+
+                    <div id="orders_list_div" class="col-md-11 text-md-left justify-content-left slow">
+                        <ul class="list-group z-depth-3 list-spy list-spy-100" data-spy="scroll" data-offset="0">
+                            <!-- <li class="list-group-item d-flex justify-content-center align-items-center">
+                                <i class="fa fa-times-circle fa-lg pr-3" aria-hidden="true" danger-color></i> No orders created yet.
+                            </li> -->
+                            {{#orders}}
+                            <li list-spy-item-3em class="list-group-item animated fadeIn d-flex justify-content-between align-items-center text-md-left">
+                                <i class="fa fa-list-alt fa-lg pr-3" aria-hidden="true" primary-color></i>
+                                <span ml-full> <strong>Order:</strong>
+                                    <a href="/order-manager/order/{{id}}">
+                                        <em>
+                                            {{title}}
+                                        </em>
+                                    </a></span>
+                                <span class="badge badge-primary badge-pill" data-toggle="tooltip-primary" data-placement="top" title="Items">{{itemsCount}}</span>
+                            </li>
+                            {{/orders}}
+                        </ul>
+                    </div>
+                    <!-- ./COL-->
+                </div>
+                <!-- ./ROW-->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="page-footer font-small primary-color">
+
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            <a href="#">Ericsson - UPM</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+
+    <!-- FABS -->
+    <button fav-down type="button" class="btn btn-secondary fab-button waves-effect mt-3" data-toggle="tooltip-secondary" data-placement="top" title="Create new order">
+         <i class="fa fa-plus" aria-hidden="true"></i>
+   </button>
+
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Custom modules -->
+    <script type="text/javascript" src="js/common.module.js"></script>
+    <script type="text/javascript" src="js/handler-main.js"></script>
+    <script type="text/javascript" src="js/animations-main.js"></script>
+</body>
+
+</html>

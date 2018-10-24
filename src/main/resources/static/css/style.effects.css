@@ -1,0 +1,43 @@
+.btn-outline-primary:hover {
+    border: 2px solid transparent!important;
+    color: #fff!important;
+    background-color: #4285f4!important;
+}
+
+.btn-secondary:focus,
+.btn-secondary:active,
+.btn-secondary.active,
+.btn-secondary:hover {
+    border: 2px solid #d86565!important;
+    background-color: #fff !important;
+    color: #d86565 !important;
+}
+
+.tooltip.tooltip-primary .tooltip-inner {
+    border: 2px solid #4285f4 !important;
+    background-color: #ffffffbd !important;
+    color: #4285f4 !important;
+}
+
+.tooltip.tooltip-primary .arrow,
+.tooltip.tooltip-primary .arrow:before {
+    border-top-color: #4285f4 !important;
+    border-bottom-color: #4285f4 !important;
+}
+
+.tooltip-secondary-scroll-inside .tooltip-inner,
+.tooltip.tooltip-secondary .tooltip-inner {
+    background-color: #d86565 !important;
+}
+
+.tooltip-secondary-scroll-inside .arrow,
+.tooltip-secondary-scroll-inside .arrow:before,
+.tooltip.tooltip-secondary .arrow,
+.tooltip.tooltip-secondary .arrow:before {
+    border-top-color: #d86565 !important;
+    border-bottom-color: #d86565 !important;
+}
+
+.tooltip.tooltip-secondary-scroll-inside {
+    top: -6em !important;
+}

@@ -1,0 +1,34 @@
+[nav-card-layout] {
+    min-height: 110px !important;
+}
+
+[nav-card-layout]>.navbar-brand .fa {
+    color: white!important;
+    margin-top: 2em !important;
+}
+
+[nav-card-layout]>.navbar-brand .back-button:hover .fa {
+    font-weight: bold;
+}
+
+[nav-card-layout]>.navbar-brand {
+    margin-top: -.5em !important;
+}
+
+[nav-card-layout]>.avatar {
+    margin-top: -3em !important;
+}
+
+div.card {
+    position: absolute;
+}
+
+div.card[main-card] {
+    top: 4em;
+    width: 65% !important;
+    z-index: 1200;
+}
+
+div.card[main-card-no-override] {
+    width: 65% !important;
+}
