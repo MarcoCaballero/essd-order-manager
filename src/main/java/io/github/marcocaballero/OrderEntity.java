@@ -1,5 +1,6 @@
 package io.github.marcocaballero;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -16,7 +17,12 @@ public class OrderEntity {
 	}
 
 	public OrderEntity(String title) {
+		this(title, new ArrayList<ItemEntity>());
+	}
+
+	public OrderEntity(String title, List<ItemEntity> items)  {
 		this.title = title;
+		this.items = items;
 	}
 
 	@Id
@@ -48,11 +54,10 @@ public class OrderEntity {
 
 	@Column(name = "itemsCount")
 	public int getItemsCount() {
-		return 0;
+		return items.size();
 	}
 
-	protected void setItemsCount(int items) {
-	}
+	protected void setItemsCount(int items) {}
 
 	@Override
 	public String toString() {
