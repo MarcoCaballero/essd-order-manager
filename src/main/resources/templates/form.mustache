@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Order Manager (MSC)</title>
+    <!-- Third Parties -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="css/modules/bootstrap.min.css" rel="stylesheet">
+    <link href="css/modules/mdb.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/nav-card.layout.css" rel="stylesheet">
+    <link href="css/style.effects.css" rel="stylesheet">
+    <link href="css/fav-buttons.layout.css" rel="stylesheet">
+</head>
+
+<body>
+    {{>nav-layout-header}}
+
+    <!-- Projects section v.2 -->
+    <section class="view text-center justify-content-center align-items-center" mt-20>
+        <div class="row  justify-content-center align-items-center">
+            <div class="col-8 mb-lg-8 mb-4">
+                <div class="card ">
+                    <h5 class="card-header primary-color white-text text-center py-4">
+                        <strong>New Order</strong>
+                    </h5>
+                    <!-- Grid row -->
+                    <div class="card-body">
+                        <form method="POST" action="/order-manager/order" class="text-center">
+                            <div class="md-form">
+                                <input type="text" id="order_title" name="title" class="form-control">
+                                <label for="order_title">Title</label>
+                            </div>
+                            <div class="md-form">
+                                <input type="text" name="order_name_1" class="form-control">
+                                <label for="order_name_1">Name</label>
+                            </div>
+                             <button type="submit" class="btn btn-primary btn-md">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Projects section v.2 -->
+
+
+
+    {{>footer}}
+
+    <!-- FABS -->
+    <a fav-up href="order-form.html" class="btn btn-secondary fab-button waves-effect mt-3 scroll-with-nav" data-toggle="tooltip-secondary-scroll-2-inside" data-placement="bottom" title="Save order">
+        <i class="fa fa-save" aria-hidden="true"></i>
+    </a>
+
+
+    <!-- 3rd parties -->
+    <script type="text/javascript" src="js/modules/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/modules/popper.min.js"></script>
+    <script type="text/javascript" src="js/modules/bootstrap.js"></script>
+    <script type="text/javascript" src="js/modules/mdb.min.js"></script>
+    <!-- Custom modules -->
+    <script type="text/javascript" src="js/common.module.js"></script>
+    <script type="text/javascript" src="js/animations-main.js"></script>
+    <!-- <script type="text/javascript" src="js/handler-main.js"></script> -->
+</body>
+
+</html>

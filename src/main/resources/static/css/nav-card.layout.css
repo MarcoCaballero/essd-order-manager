@@ -19,7 +19,8 @@
     margin-top: -3em !important;
 }
 
-div.card {
+div.card[main-card-no-override],
+div.card[main-card] {
     position: absolute;
 }
 

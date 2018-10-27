@@ -25,11 +25,14 @@
     border-bottom-color: #4285f4 !important;
 }
 
+.tooltip-secondary-scroll-2-inside .tooltip-inner,
 .tooltip-secondary-scroll-inside .tooltip-inner,
 .tooltip.tooltip-secondary .tooltip-inner {
     background-color: #d86565 !important;
 }
 
+.tooltip-secondary-scroll-2-inside .arrow,
+.tooltip-secondary-scroll-2-inside .arrow:before,
 .tooltip-secondary-scroll-inside .arrow,
 .tooltip-secondary-scroll-inside .arrow:before,
 .tooltip.tooltip-secondary .arrow,
@@ -40,4 +43,8 @@
 
 .tooltip.tooltip-secondary-scroll-inside {
     top: -6em !important;
+}
+
+.tooltip.tooltip-secondary-scroll-2-inside {
+    top: -13.4em !important;
 }

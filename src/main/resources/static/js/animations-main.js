@@ -52,14 +52,22 @@ const optionsSecondary = {
 const optionsSecondaryWithSpy = {
     cssClass: 'tooltip-secondary-scroll-inside',
     options: {
-        template: buildTemplate('tooltip-secondary-scroll-inside', )
+        template: buildTemplate('tooltip-secondary-scroll-inside')
+    }
+}
+
+const optionsSecondaryWithSpy2 = {
+    cssClass: 'tooltip-secondary-scroll-2-inside',
+    options: {
+        template: buildTemplate('tooltip-secondary-scroll-2-inside')
     }
 }
 
 tooltipOptions = [
     optionsPrimary,
     optionsSecondary,
-    optionsSecondaryWithSpy
+    optionsSecondaryWithSpy,
+    optionsSecondaryWithSpy2
 ]
 
 tooltipOptions.forEach(tooltip => {

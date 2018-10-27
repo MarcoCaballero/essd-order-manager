@@ -12,7 +12,7 @@ public class OrderEntity {
 	private String title;
 	private List<ItemEntity> items;
 
-	protected OrderEntity() {
+	public OrderEntity() {
 		this("Default title");
 	}
 

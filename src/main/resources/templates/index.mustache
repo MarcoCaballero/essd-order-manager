@@ -88,23 +88,12 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="page-footer font-small primary-color">
-
-
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2018 Copyright:
-            <a href="#">Ericsson - UPM</a>
-        </div>
-        <!-- Copyright -->
-
-    </footer>
-    <!-- Footer -->
+    {{>footer}}
 
     <!-- FABS -->
-    <button fav-down type="button" class="btn btn-secondary fab-button waves-effect mt-3" data-toggle="tooltip-secondary" data-placement="top" title="Create new order">
+    <a fav-down href="/order-manager/order/form" class="btn btn-secondary fab-button waves-effect mt-3" data-toggle="tooltip-secondary" data-placement="top" title="Create new order">
          <i class="fa fa-plus" aria-hidden="true"></i>
-   </button>
+    </a>
 
     <!-- 3rd parties -->
     <script type="text/javascript" src="js/modules/jquery-3.3.1.min.js"></script>

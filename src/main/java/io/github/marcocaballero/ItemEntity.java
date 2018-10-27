@@ -9,7 +9,7 @@ public class ItemEntity {
 	private long id;
 	private String name;
 
-	protected ItemEntity() {
+	public ItemEntity() {
 		this("Default_Name");
 	}
 

@@ -1,15 +1,17 @@
 package io.github.marcocaballero;
 
 import java.util.Arrays;
-
+import java.util.List;
+import java.util.Optional;
 import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/order-manager")
@@ -27,11 +29,8 @@ public class OrderManagerController {
 	public void init() {
 		OrderEntity order1 = new OrderEntity("Order 1");
 		OrderEntity order2 = new OrderEntity("Order 2");
-		order1.setItems(Arrays.asList(
-			new ItemEntity("Item_1__Order_1"), 
-			new ItemEntity("Item_2__Order_1"),
-			new ItemEntity("Item_3__Order_1"))
-		);
+		order1.setItems(Arrays.asList(new ItemEntity("Item_1__Order_1"),
+				new ItemEntity("Item_2__Order_1"), new ItemEntity("Item_3__Order_1")));
 		orderRepository.save(order1);
 		orderRepository.save(order2);
 	}
@@ -47,11 +46,26 @@ public class OrderManagerController {
 	@GetMapping("/order/{orderId}")
 	public String getOrder(Model model, @PathVariable long orderId) {
 
-		OrderEntity order = (orderRepository.findById(orderId))
-											.orElse(new OrderEntity("Not Found 404"));
+		OrderEntity order =
+				(orderRepository.findById(orderId)).orElse(new OrderEntity("Not Found 404"));
 
 		model.addAttribute("order", order);
 
 		return ORDER_DETAIL_TEMPLATE;
+	}
+
+	@GetMapping("/order/form")
+	public String getForm() {
+
+		return "form";
+	}
+
+	@PostMapping("/order")
+	public String UpdateOrder(Model model, @RequestParam(required = false) String orderTitle,
+			@RequestParam("name") List<String> names) {
+
+			names.stream().forEach(System.out::println);
+
+		return "redirect:/order-manager/order";
 	}
 }

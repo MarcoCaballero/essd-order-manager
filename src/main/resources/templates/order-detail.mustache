@@ -20,18 +20,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar primary-color" nav-card-layout>
-        <div class="navbar-brand" href="#">
-            MSC - ESSD
-            <br>
-            <a class="back-button" href="/order-manager/orders" data-toggle="tooltip-secondary-scroll-inside" data-placement="bottom" title="Back Home">
-                <i class="fa fa-lg fa-angle-left" aria-hidden="true"></i>
-            </a>
-        </div>
-        <div class="avatar ml-auto white">
-            <img src="https://pbs.twimg.com/profile_images/1051588814274224129/4X-41oJc_400x400.jpg" alt="marco caballero" class="avatar-mini img-fluid z-depth-1 rounded-circle">
-        </div>
-    </nav>
+    {{>nav-layout-header}}
 
     <!-- Projects section v.2 -->
     <section class="view text-center my-5" mt-10>
@@ -73,21 +62,10 @@
     <!-- Projects section v.2 -->
 
 
-    <!-- Footer -->
-    <footer class="page-footer font-small primary-color">
-
-
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2018 Copyright:
-            <a href="#">Ericsson - UPM</a>
-        </div>
-        <!-- Copyright -->
-
-    </footer>
-    <!-- Footer -->
+    {{>footer}}
 
     <!-- FABS -->
-    <a fav-up href="order-form.html" class="btn btn-secondary fab-button waves-effect mt-3 scroll-with-nav" data-toggle="tooltip-secondary-scroll-inside" data-placement="bottom" title="Edit order">
+    <a fav-up href="/order-manager/order/form" class="btn btn-secondary fab-button waves-effect mt-3 scroll-with-nav" data-toggle="tooltip-secondary-scroll-inside" data-placement="bottom" title="Edit order">
         <i class="fa fa-pencil" aria-hidden="true"></i>
     </a>
 

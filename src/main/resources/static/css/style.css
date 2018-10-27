@@ -85,6 +85,14 @@ nav[fixed] {
     margin-top: 6rem!important;
 }
 
+[mt-20] {
+    margin-top: 12rem!important;
+}
+
+[mt-50] {
+    margin-top: 30rem!important;
+}
+
 [ml-full] {
     margin-left: -66.8% !important;
 }
