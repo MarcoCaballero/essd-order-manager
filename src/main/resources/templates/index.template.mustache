@@ -36,12 +36,22 @@
                     <!-- COL-->
                     <div class="col-md-12 text-md-center wow fadeInLeft justify-content-center align-items-center">
                         <h1 class="animated fadeIn mb-4" primary-text-color>Order Manager</h1>
-                        <h5 class="animated fadeIn text-muted mb-2">Here you can manage the orders.</h5>
+                        {{#hasOrders}}
+                            <h5 class="animated fadeIn text-muted mb-2">Here you can manage the orders.</h5>
+                        {{/hasOrders}}
+                        {{^hasOrders}}
+                            <h5 class="animated fadeIn text-muted mb-2">There are not available orders.</h5>
+                        {{/hasOrders}}
                         <div class="d-flex justify-content-center align-items-center">
-                            <p class="animated fadeIn text-muted mb-2">Available orders, click</p>
-                            <button id="go_to_orders_list_btn" class="btn btn-outline-primary btn-rounded waves-effect px-3">
-                                <i class="fa fa-arrow-down pr-2" aria-hidden="true"></i> Go!
-                             </button>
+                            {{#hasOrders}}
+                                <p class="animated fadeIn text-muted mb-2">Available orders, click</p>
+                                <button id="go_to_orders_list_btn" class="btn btn-outline-primary btn-rounded waves-effect px-3">
+                                    <i class="fa fa-arrow-down pr-2" aria-hidden="true"></i> Go!
+                                </button>
+                            {{/hasOrders}}
+                            {{^hasOrders}}
+                               <p class="animated fadeIn text-muted mb-2 mt-2">Click on the bottom-right to create the first.</p>
+                            {{/hasOrders}}
                         </div>
                     </div>
                     <!-- ./COL-->
@@ -51,6 +61,7 @@
         </div>
     </section>
 
+    {{#hasOrders}}
     <section class="view">
         <div class="mask base-color d-flex justify-content-center align-items-center">
             <div class="container">
@@ -64,9 +75,6 @@
 
                     <div id="orders_list_div" class="col-md-11 text-md-left justify-content-left slow">
                         <ul class="list-group z-depth-3 list-spy list-spy-100" data-spy="scroll" data-offset="0">
-                            <!-- <li class="list-group-item d-flex justify-content-center align-items-center">
-                                <i class="fa fa-times-circle fa-lg pr-3" aria-hidden="true" danger-color></i> No orders created yet.
-                            </li> -->
                             {{#orders}}
                             <li list-spy-item-3em class="list-group-item animated fadeIn d-flex justify-content-between align-items-center text-md-left">
                                 <i class="fa fa-list-alt fa-lg pr-3" aria-hidden="true" primary-color></i>
@@ -87,11 +95,20 @@
             </div>
         </div>
     </section>
+    {{/hasOrders}}
 
-    {{>footer}}
+    {{>_footer}}
 
     <!-- FABS -->
-    <a fav-down href="/order-manager/order/form" class="btn btn-secondary fab-button waves-effect mt-3" data-toggle="tooltip-secondary" data-placement="top" title="Create new order">
+    {{^hasOrders}}
+    <h3>
+        <span class="badge badge-pill primary-color fab-recommendation animated wow bounce infinite">
+            Create new Order
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </span>
+    </h3>
+    {{/hasOrders}}
+    <a fav-down href="/order-manager/order/new" class="btn btn-secondary fab-button waves-effect mt-3" data-toggle="tooltip-secondary" data-placement="top" title="Create new order">
          <i class="fa fa-plus" aria-hidden="true"></i>
     </a>
 

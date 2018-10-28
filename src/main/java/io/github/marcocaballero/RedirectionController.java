@@ -10,4 +10,9 @@ public class RedirectionController {
 	public String redirectHome() {
 		return "redirect:/order-manager";
 	}
+
+	@GetMapping("/order-manager/order")
+	public String redirectHomeFromWrong() {
+		return redirectHome();
+	}
 }

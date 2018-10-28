@@ -2,7 +2,6 @@ package io.github.marcocaballero;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,29 +15,39 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/order-manager")
 public class OrderManagerController {
-	private static final String HOME_INDEX_TEMPLATE = "index";
-	private static final String ORDER_DETAIL_TEMPLATE = "order-detail";
+	private static final String HOME_INDEX_TEMPLATE = "index.template";
+	private static final String ORDER_DETAIL_TEMPLATE = "order-detail.template";
+	private static final String ORDER_FORM_TEMPLATE = "form.template";
+	private static final String REDIRECT_HOME = "redirect:/order-manager/orders";
+
+	private OrderService orderService;
 	private OrderRepository orderRepository;
 
 	@Autowired
-	public OrderManagerController(OrderRepository orderRepository) {
+	public OrderManagerController(OrderService orderService, OrderRepository orderRepository) {
+		this.orderService = orderService;
 		this.orderRepository = orderRepository;
 	}
 
 	@PostConstruct
 	public void init() {
-		OrderEntity order1 = new OrderEntity("Order 1");
-		OrderEntity order2 = new OrderEntity("Order 2");
-		order1.setItems(Arrays.asList(new ItemEntity("Item_1__Order_1"),
-				new ItemEntity("Item_2__Order_1"), new ItemEntity("Item_3__Order_1")));
-		orderRepository.save(order1);
-		orderRepository.save(order2);
+		// OrderEntity order1 = new OrderEntity("Order 1");
+		// OrderEntity order2 = new OrderEntity("Order 2");
+		// order1.setItems(Arrays.asList(
+		// new ItemEntity("Item_1__Order_1"),
+		// new ItemEntity("Item_2__Order_1"),
+		// new ItemEntity("Item_3__Order_1")));
+		// orderRepository.save(order1);
+		// orderRepository.save(order2);
 	}
 
 	@GetMapping({"/orders", "/", ""})
 	public String getOrders(Model model) {
 
-		model.addAttribute("orders", orderRepository.findAll());
+		List<OrderEntity> orders = orderRepository.findAll();
+
+		model.addAttribute("orders", orders);
+		model.addAttribute("hasOrders", !orders.isEmpty());
 
 		return HOME_INDEX_TEMPLATE;
 	}
@@ -46,26 +55,32 @@ public class OrderManagerController {
 	@GetMapping("/order/{orderId}")
 	public String getOrder(Model model, @PathVariable long orderId) {
 
-		OrderEntity order =
-				(orderRepository.findById(orderId)).orElse(new OrderEntity("Not Found 404"));
-
-		model.addAttribute("order", order);
+		model.addAttribute("order", orderService.findOrderById(orderId));
 
 		return ORDER_DETAIL_TEMPLATE;
 	}
 
-	@GetMapping("/order/form")
-	public String getForm() {
+	@GetMapping("/order/new")
+	public String getFormNew() {
 
-		return "form";
+		return ORDER_FORM_TEMPLATE;
+	}
+
+	
+	@GetMapping("/order/edit/{orderId}")
+	public String getFormEdit(Model model, @PathVariable long orderId) {
+
+		model.addAttribute("order", orderService.findOrderById(orderId));
+
+		return ORDER_FORM_TEMPLATE;
 	}
 
 	@PostMapping("/order")
-	public String UpdateOrder(Model model, @RequestParam(required = false) String orderTitle,
-			@RequestParam("name") List<String> names) {
+	public String UpdateOrder(Model model, @RequestParam String orderTitle,
+			@RequestParam("element") String... elements) {
+		
+		orderService.addOrder(orderTitle, elements);
 
-			names.stream().forEach(System.out::println);
-
-		return "redirect:/order-manager/order";
+		return REDIRECT_HOME;
 	}
 }

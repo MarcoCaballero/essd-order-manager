@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    {{>nav-layout-header}}
+    {{>_nav-header}}
 
     <!-- Projects section v.2 -->
     <section class="view text-center my-5" mt-10>
@@ -38,7 +38,7 @@
                         <div class="custom-control custom-checkbox clearfix">
                             <input type="checkbox" class="custom-control-input float-left" id="defaultUnchecked">
                             <label class="custom-control-label float-left mt-2 ml-5" for="defaultUnchecked" padd-left>
-                                Element 1
+                                {{name}}
                             </label>
                             <a href="#" class="btn btn-sm btn-danger float-right">Delete</a>
                         </div>
@@ -48,7 +48,7 @@
                     <li class="list-group-item">
                         <div class="custom-control custom-checkbox clearfix">
                             <span>
-                                Empty
+                                There are not items.
                             </span>
                         </div>
                     </li> 
@@ -62,10 +62,10 @@
     <!-- Projects section v.2 -->
 
 
-    {{>footer}}
+    {{>_footer}}
 
     <!-- FABS -->
-    <a fav-up href="/order-manager/order/form" class="btn btn-secondary fab-button waves-effect mt-3 scroll-with-nav" data-toggle="tooltip-secondary-scroll-inside" data-placement="bottom" title="Edit order">
+    <a fav-up href="/order-manager/order/edit/{{order.id}}" class="btn btn-secondary fab-button waves-effect mt-3 scroll-with-nav" data-toggle="tooltip-secondary-scroll-inside" data-placement="bottom" title="Edit order">
         <i class="fa fa-pencil" aria-hidden="true"></i>
     </a>
 

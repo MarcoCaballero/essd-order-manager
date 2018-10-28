@@ -10,7 +10,11 @@
 .fab-button i.fa {
     font-size: 1.5rem !important;
     right: 7.9px;
-    top: 0.1em;
+    top: 0.22em;
+}
+
+.fab-button i.fa-save {
+    top: 0.02em!important;
 }
 
 .fab-button i.fa.fa-send {
@@ -41,4 +45,10 @@
     -moz-transform: translateY(10px);
     -o-transform: translateY(10px);
     -ms-transform: translateY(10px);
+}
+
+span.fab-recommendation {
+    position: fixed;
+    bottom: 30px;
+    right: 100px;
 }
