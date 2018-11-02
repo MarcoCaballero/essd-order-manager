@@ -2,6 +2,8 @@ package io.github.marcocaballero;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,7 +22,7 @@ public class OrderEntity {
 		this(title, new ArrayList<ItemEntity>());
 	}
 
-	public OrderEntity(String title, List<ItemEntity> items)  {
+	public OrderEntity(String title, List<ItemEntity> items) {
 		this.title = title;
 		this.items = items;
 	}
@@ -43,7 +45,7 @@ public class OrderEntity {
 		this.title = title;
 	}
 
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	public List<ItemEntity> getItems() {
 		return items;
 	}
@@ -57,7 +59,28 @@ public class OrderEntity {
 		return items.size();
 	}
 
-	protected void setItemsCount(int items) {}
+	protected void setItemsCount(int items) {
+	}
+
+	public void removeItemByName(String name) {
+		Optional<ItemEntity> itemToRemove = getItemByName(name);
+		if (itemToRemove.isPresent()) {
+			items.remove(itemToRemove.get());
+		}
+	}
+
+	public void updateItemName(String name) {
+		Optional<ItemEntity> itemToUpdate = getItemByName(name);
+		if (itemToUpdate.isPresent()) {
+			itemToUpdate.get().setName(name);
+		}
+	}
+
+	private Optional<ItemEntity> getItemByName(String name) {
+		return items.stream()
+							.filter(item -> item.getName() == name)
+							.findFirst();
+	}
 
 	@Override
 	public String toString() {

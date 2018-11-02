@@ -22,7 +22,6 @@
 <body>
     {{>_nav-header}}
 
-    <!-- Projects section v.2 -->
     <div class="view-small text-center justify-content-center align-items-center" mt-20>
         <div class="row  justify-content-center align-items-center">
             <div class="col-8 mb-lg-8 mb-4">
@@ -43,16 +42,21 @@
             </div>
         </div>
     </div>
-    <!-- Projects section v.2 -->
-
 
 
     {{>_footer}}
 
     <!-- FABS -->
-    <button fav-up id="send_new_order_btn" class="btn btn-secondary fab-button waves-effect mt-3 scroll-with-nav" data-toggle="tooltip-secondary-scroll-2-inside" data-placement="bottom" title="Save order">
-        <i class="fa fa-save" aria-hidden="true"></i>
-    </button>
+    {{#order}}
+        <button fav-up id="send_new_order_btn" class="btn btn-secondary fab-button waves-effect mt-3 scroll-with-nav" data-toggle="tooltip-secondary-scroll-2-inside" data-placement="bottom" title="Save order">
+            <i class="fa fa-save" aria-hidden="true"></i>
+        </button>
+    {{/order}}
+    {{^order}}
+        <button fav-up id="send_new_order_btn" class="btn btn-secondary fab-button waves-effect mt-3 scroll-with-nav" data-toggle="tooltip-secondary-scroll-2-inside" data-placement="bottom" title="Save order" disabled>
+            <i class="fa fa-save" aria-hidden="true"></i>
+        </button>
+    {{/order}}
 
 
     <!-- 3rd parties -->

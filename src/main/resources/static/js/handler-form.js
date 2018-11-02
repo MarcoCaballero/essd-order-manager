@@ -1,4 +1,9 @@
-const newElementHTML = '<div class="md-form"><input type="text" id="order_name_1" name="element" class="form-control"><label for="order_name_1">Item</label></div>';
+const newElementHTML = '<div class="md-form"><input type="text" id="order_name_1" name="element" class="form-control" onchange="checkFormValidty(this)" onkeyup="checkFormValidty(this)" onpaste="checkFormValidty(this)" oncut="checkFormValidty(this)" required><label for="order_name_1">Item</label></div>';
+
+checkFormValidty = (elem) => {
+    const shouldDisableButton = (!new_order_form.checkValidity()) || elem.value == '';
+    send_new_order_btn.disabled = shouldDisableButton;
+}
 
 send_new_order_btn.onclick = () => {
     new_order_form.submit();

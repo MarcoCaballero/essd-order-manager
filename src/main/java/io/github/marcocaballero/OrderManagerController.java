@@ -2,7 +2,9 @@ package io.github.marcocaballero;
 
 import java.util.Arrays;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,14 +33,14 @@ public class OrderManagerController {
 
 	@PostConstruct
 	public void init() {
-		// OrderEntity order1 = new OrderEntity("Order 1");
-		// OrderEntity order2 = new OrderEntity("Order 2");
-		// order1.setItems(Arrays.asList(
-		// new ItemEntity("Item_1__Order_1"),
-		// new ItemEntity("Item_2__Order_1"),
-		// new ItemEntity("Item_3__Order_1")));
-		// orderRepository.save(order1);
-		// orderRepository.save(order2);
+		OrderEntity order1 = new OrderEntity("Order 1");
+		OrderEntity order2 = new OrderEntity("Order 2");
+		order1.setItems(Arrays.asList(
+								new ItemEntity("Item_1__Order_1"),
+								new ItemEntity("Item_2__Order_1"),
+								new ItemEntity("Item_3__Order_1")));
+		orderRepository.save(order1);
+		orderRepository.save(order2);
 	}
 
 	@GetMapping({"/orders", "/", ""})

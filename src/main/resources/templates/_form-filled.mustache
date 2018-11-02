@@ -1,13 +1,13 @@
 <form id="new_order_form" method="POST" action="/order-manager/order" class="text-center">
     <h5 class="white-text text-left" primary-color>Order title</h5>
     <div class="md-form">
-        <input type="text" id="order_title" name="orderTitle" class="form-control" value="{{order.title}}">
+        <input type="text" id="order_title" name="orderTitle" class="form-control" onchange="checkFormValidty(this)" onkeyup="checkFormValidty(this)" onpaste="checkFormValidty(this)" oncut="checkFormValidty(this)" value="{{order.title}}" required>
         <label for="order_title">Title</label>
     </div>
     <h5 class="white-text text-left" primary-color>Items</h5>
     {{#order.items}}
         <div class="md-form">
-            <input type="text" id="order_name_1" name="element" class="form-control" value="{{name}}">
+            <input type="text" id="order_name_1" name="element" class="form-control" onchange="checkFormValidty(this)" onkeyup="checkFormValidty(this)" onpaste="checkFormValidty(this)" oncut="checkFormValidty(this)" value="{{name}}" required>
             <label for="order_name_1">Item</label>
         </div>
     {{/order.items}}
