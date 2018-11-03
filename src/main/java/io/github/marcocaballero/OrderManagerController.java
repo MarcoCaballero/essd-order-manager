@@ -1,14 +1,19 @@
 package io.github.marcocaballero;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-import javax.annotation.PostConstruct;
-
+import org.javatuples.Pair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,72 +22,52 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/order-manager")
 public class OrderManagerController {
-	private static final String HOME_INDEX_TEMPLATE = "index.template";
-	private static final String ORDER_DETAIL_TEMPLATE = "order-detail.template";
-	private static final String ORDER_FORM_TEMPLATE = "form.template";
-	private static final String REDIRECT_HOME = "redirect:/order-manager/orders";
+
+	private final Logger logger = LoggerFactory.getLogger(OrderManagerController.class);
+
+	private static final String REDIRECT_RELATIVE = "redirect:/";
+	private static final String REDIRECT_HOME = REDIRECT_RELATIVE + "order-manager/orders";
+	private static final String REDIRECT_ORDER_ID = REDIRECT_RELATIVE + "order-manager/order/";
 
 	private OrderService orderService;
-	private OrderRepository orderRepository;
 
 	@Autowired
-	public OrderManagerController(OrderService orderService, OrderRepository orderRepository) {
+	public OrderManagerController(OrderService orderService) {
 		this.orderService = orderService;
-		this.orderRepository = orderRepository;
-	}
-
-	@PostConstruct
-	public void init() {
-		OrderEntity order1 = new OrderEntity("Order 1");
-		OrderEntity order2 = new OrderEntity("Order 2");
-		order1.setItems(Arrays.asList(
-								new ItemEntity("Item_1__Order_1"),
-								new ItemEntity("Item_2__Order_1"),
-								new ItemEntity("Item_3__Order_1")));
-		orderRepository.save(order1);
-		orderRepository.save(order2);
-	}
-
-	@GetMapping({"/orders", "/", ""})
-	public String getOrders(Model model) {
-
-		List<OrderEntity> orders = orderRepository.findAll();
-
-		model.addAttribute("orders", orders);
-		model.addAttribute("hasOrders", !orders.isEmpty());
-
-		return HOME_INDEX_TEMPLATE;
-	}
-
-	@GetMapping("/order/{orderId}")
-	public String getOrder(Model model, @PathVariable long orderId) {
-
-		model.addAttribute("order", orderService.findOrderById(orderId));
-
-		return ORDER_DETAIL_TEMPLATE;
-	}
-
-	@GetMapping("/order/new")
-	public String getFormNew() {
-
-		return ORDER_FORM_TEMPLATE;
-	}
-
-	
-	@GetMapping("/order/edit/{orderId}")
-	public String getFormEdit(Model model, @PathVariable long orderId) {
-
-		model.addAttribute("order", orderService.findOrderById(orderId));
-
-		return ORDER_FORM_TEMPLATE;
 	}
 
 	@PostMapping("/order")
-	public String UpdateOrder(Model model, @RequestParam String orderTitle,
-			@RequestParam("element") String... elements) {
-		
+	public String createNewOrder(Model model, @RequestParam String orderTitle,
+			                     @RequestParam("element") List<String> elements) {
+
 		orderService.addOrder(orderTitle, elements);
 
 		return REDIRECT_HOME;
+	}
+
+	@PostMapping("/order/{orderId}")
+	public String updateOrder(@PathVariable long orderId,
+							  @RequestParam String orderTitle,
+							  @RequestParam("elementID") List<Integer> elementIds, 
+							  @RequestParam("element") List<String> elements) {
+
+		logger.info("Updating Order with ID: {}", orderId);
+
+		Map<Long, List<String>> itemsMap = IntStream.range(0, elementIds.size())
+				.boxed()
+				.map(idx -> new Pair<Long, String>(Long.valueOf(elementIds.get(idx)), elements.get(idx)))
+				.filter(pair -> pair instanceof Pair<?, ?>) // assertion
+				.collect(Collectors.groupingBy(Pair::getValue0, Collectors.mapping(Pair::getValue1, Collectors.toList())));
+
+		orderService.updateOrder(orderId, orderTitle, itemsMap);
+
+		return REDIRECT_ORDER_ID + String.valueOf(orderId);
+	}
+
+	@DeleteMapping("/order/{orderId}/item/{itemId}")
+	public ResponseEntity deleteItem(@PathVariable long orderId, @PathVariable long itemId) {
+		orderService.deleteItemById(orderId, itemId);
+
+		return ResponseEntity.ok().build();
 	}
 }

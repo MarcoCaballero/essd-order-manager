@@ -27,7 +27,12 @@
             <div class="col-8 mb-lg-8 mb-4">
                 <div class="card ">
                     <h5 class="card-header primary-color white-text text-center py-4">
-                        <strong>New Order</strong>
+                        {{#order}}
+                            <strong>Edit Order</strong>
+                        {{/order}}
+                        {{^order}}
+                            <strong>New Order</strong>
+                        {{/order}}                        
                     </h5>
                     <!-- Grid row -->
                     <div class="card-body">

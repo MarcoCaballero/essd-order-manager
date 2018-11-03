@@ -31,11 +31,17 @@
                     </h5>
                     <!-- Grid row -->
                     <div class="card-body">
-                    <ul class="list-group list-group-flush clearfix">
+                    <ul class="list-group list-group-flush">
                         {{#order.items}}
-                            <li class="list-group-item float-left">
-                                <i class="fa fa-eercast float-left" aria-hidden="true"></i>
-                                <strong>{{name}}</strong>
+                            <li class="list-group-item clearfix">
+                                <i class="fa fa-eercast float-left mt-2" aria-hidden="true"></i>
+                                <span style="vertical-align: -webkit-baseline-middle;"><strong>{{name}}</strong></span>
+                                {{#showDeletBtn}}
+                                <button onclick="deleteItemById('{{order.id}}', '{{id}}')" type="button" class="btn btn-secondary btn-sm float-right btn-md">
+                                    <i class="fa fa-trash mr-2" aria-hidden="true"></i>
+                                    Delete
+                                </button>
+                                {{/showDeletBtn}}
                             </li>
                         {{/order.items}}
                     </ul>
@@ -49,7 +55,7 @@
     {{>_footer}}
 
     <!-- FABS -->
-    <a fav-up href="/order-manager/order/edit/{{order.id}}" class="btn btn-secondary fab-button waves-effect mt-3 scroll-with-nav" data-toggle="tooltip-secondary-scroll-inside" data-placement="bottom" title="Edit order">
+    <a fav-up href="/order-manager/order/edit/{{order.id}}" class="btn btn-secondary fab-button waves-effect mt-3 scroll-with-nav" data-toggle="tooltip-secondary-scroll-2-inside" data-placement="bottom" title="Edit order">
         <i class="fa fa-pencil" aria-hidden="true"></i>
     </a>
 
@@ -62,7 +68,7 @@
     <!-- Custom modules -->
     <script type="text/javascript" src="js/common.module.js"></script>
     <script type="text/javascript" src="js/animations-main.js"></script>
-    <!-- <script type="text/javascript" src="js/handler-main.js"></script> -->
+    <script type="text/javascript" src="js/handler-detail.js"></script>
 </body>
 
 </html>

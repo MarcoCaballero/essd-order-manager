@@ -33,53 +33,57 @@ public class OrderEntity {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	@OneToMany(cascade = CascadeType.ALL)
+	public List<ItemEntity> getItems() {
+		return items;
 	}
 
 	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public int getItemsCount() {
+		return items.size();
 	}
 
-	@OneToMany(cascade = CascadeType.ALL)
-	public List<ItemEntity> getItems() {
-		return items;
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public void setItems(List<ItemEntity> items) {
 		this.items = items;
 	}
 
-	@Column(name = "itemsCount")
-	public int getItemsCount() {
-		return items.size();
-	}
-
 	protected void setItemsCount(int items) {
 	}
 
-	public void removeItemByName(String name) {
-		Optional<ItemEntity> itemToRemove = getItemByName(name);
-		if (itemToRemove.isPresent()) {
-			items.remove(itemToRemove.get());
-		}
+	public void addItem(String value) {
+		items.add(new ItemEntity(value));
 	}
 
-	public void updateItemName(String name) {
-		Optional<ItemEntity> itemToUpdate = getItemByName(name);
-		if (itemToUpdate.isPresent()) {
-			itemToUpdate.get().setName(name);
-		}
+	public void addItems(List<String> values) {
+		values.stream()
+			  .forEach(this::addItem);
 	}
 
-	private Optional<ItemEntity> getItemByName(String name) {
-		return items.stream()
-							.filter(item -> item.getName() == name)
-							.findFirst();
+	public void setItem(long itemId, String value) {
+		findItemById(itemId)
+			.ifPresent(item -> item.setName(value));
+	}
+
+	public void deleteItemById(long itemId) {
+		findItemById(itemId)
+			.ifPresent(item -> items.remove(item));
+	}
+
+	private Optional<ItemEntity> findItemById(long itemId) {
+		return items.parallelStream()
+					.filter(elem -> elem.getId() == itemId)
+					.findAny();
 	}
 
 	@Override

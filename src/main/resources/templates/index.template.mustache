@@ -79,13 +79,13 @@
                             {{#orders}}
                             <li list-spy-item-3em class="list-group-item animated fadeIn d-flex justify-content-between align-items-center text-md-left">
                                 <i class="fa fa-list-alt fa-lg pr-3" aria-hidden="true" primary-color></i>
-                                <span ml-full> <strong>Order:</strong>
+                                <span class="ml-3"> <strong>Order:</strong>
                                     <a href="/order-manager/order/{{id}}">
                                         <em>
                                             {{title}}
                                         </em>
                                     </a></span>
-                                <span class="badge badge-primary badge-pill" data-toggle="tooltip-primary" data-placement="top" title="Items">{{itemsCount}}</span>
+                                <span class="badge badge-primary badge-pill" data-toggle="tooltip-primary" data-placement="bottom" title="Items">{{itemsCount}}</span>
                             </li>
                             {{/orders}}
                         </ul>
