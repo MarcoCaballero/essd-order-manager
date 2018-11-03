@@ -66,8 +66,10 @@ public class OrderEntity {
 	}
 
 	public void addItems(List<String> values) {
-		values.stream()
-			  .forEach(this::addItem);
+		if(values != null){
+			values.stream()
+					.forEach(this::addItem);
+		}
 	}
 
 	public void setItem(long itemId, String value) {
