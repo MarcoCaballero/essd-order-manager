@@ -62,7 +62,7 @@ public class OrderEntity {
 	}
 
 	public void addItem(String value) {
-		items.add(new ItemEntity(value));
+		items.add(new ItemEntity(value, false));
 	}
 
 	public void addItems(List<String> values) {
@@ -70,14 +70,14 @@ public class OrderEntity {
 				.forEach(this::addItem);
 	}
 
-	public void setItem(long itemId, String value) {
-		findItemById(itemId)
-			.ifPresent(item -> item.setName(value));
-	}
-
 	public void deleteItemById(long itemId) {
 		findItemById(itemId)
 			.ifPresent(item -> items.remove(item));
+	}
+
+	public void setItemChecked(long itemId, boolean status) {
+		findItemById(itemId)
+			.ifPresent(item -> item.setChecked(status));
 	}
 
 	private Optional<ItemEntity> findItemById(long itemId) {

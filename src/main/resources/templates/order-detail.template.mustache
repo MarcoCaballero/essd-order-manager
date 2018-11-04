@@ -19,8 +19,19 @@
     <link href="css/fav-buttons.layout.css" rel="stylesheet">
 </head>
 
-<body>
-    {{>_nav-header}}
+<body onload="init()">
+    <nav id="navDetail" class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar primary-color" nav-card-layout>
+        <div class="navbar-brand" href="#">
+            MSC - ESSD
+            <br>
+                <a class="back-button" href="/order-manager/orders" data-toggle="tooltip-secondary-scroll-2-inside" data-placement="bottom" title="Back">
+                    <i class="fa fa-lg fa-angle-left" aria-hidden="true"></i>
+                </a>
+        </div>
+        <div class="avatar ml-auto white">
+            <img src="https://pbs.twimg.com/profile_images/1051588814274224129/4X-41oJc_400x400.jpg" alt="marco caballero" class="avatar-mini img-fluid z-depth-1 rounded-circle">
+        </div>
+    </nav>
 
     <div class="view-small text-center justify-content-center align-items-center" mt-20>
         <div class="row justify-content-center align-items-center">
@@ -35,8 +46,10 @@
                     <ul class="list-group list-group-flush">
                         {{#order.items}}
                             <li class="list-group-item clearfix">
-                                <i class="fa fa-eercast float-left mt-2" aria-hidden="true"></i>
-                                <span style="vertical-align: -webkit-baseline-middle;"><strong>{{name}}</strong></span>
+                                <div class="custom-control float-left custom-checkbox custom-control-inline">
+                                    <input type="checkbox" onclick="toggleCheck(this, '{{order.id}}','{{id}}')" class="custom-control-input" name="elementChecked" id="check_{{id}}" value="{{checked}}">
+                                    <label class="custom-control-label" id="label_check_{{id}}" for="check_{{id}}" style="vertical-align: -webkit-baseline-middle;"><strong class="ml-3">{{name}}</strong></label>
+                                </div>
                                 {{#showDeletBtn}}
                                 <button onclick="deleteItemById('{{order.id}}', '{{id}}')" type="button" class="btn btn-secondary btn-sm float-right btn-md">
                                     <i class="fa fa-trash mr-2" aria-hidden="true"></i>
@@ -56,36 +69,35 @@
     {{>_footer}}
 
     <!-- FABS -->
-    <a fav-up onclick="checkDeletion()" class="btn btn-secondary fab-button mt-3 scroll-with-nav" data-toggle="tooltip-secondary-scroll-2-inside" data-placement="bottom" title="Remove order">
+    <a fav-up onclick="checkDeletion()" class="btn btn-secondary fab-button mt-3 scroll-with-nav" data-toggle="tooltip-secondary-scroll-2-inside" data-placement="bottom" title="Delete order">
         <i class="fa fa-trash" aria-hidden="true"></i>
     </a>
     <a fav-down href="/order-manager/order/edit/{{order.id}}" class="btn btn-secondary fab-button" data-toggle="tooltip-secondary-scroll-2-inside" data-placement="top" title="Edit order">
         <i class="fa fa-pencil" aria-hidden="true"></i>
     </a>
 
-    <!-- modal -->
+    <!-- MODALS -->
     <div id="orderDeletionModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="orderDeletionModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="orderDeletionModalLabel">Are you sure?</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderDeletionModalLabel">Are you sure?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>You will remove the order:</h5>
+                    <span><em>ID:</em> <strong>{{order.id}}</strong></span>
+                    <span><em>Title:</em> <strong>{{order.title}}</strong></span>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    <button onClick="deleteOrderById('{{order.id}}')" class="btn btn-secondary">Delete</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <h5>You will remove the order:</h5>
-          <span><em>ID:</em> <strong>{{order.id}}</strong></span>
-          <span><em>Title:</em> <strong>{{order.title}}</strong></span>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
-          <button onClick="deleteOrderById('{{order.id}}')" class="btn btn-secondary">Delete</button>
-        </div>
-      </div>
     </div>
-  </div>
-
 
     <!-- 3rd parties -->
     <script type="text/javascript" src="js/modules/jquery-3.3.1.min.js"></script>

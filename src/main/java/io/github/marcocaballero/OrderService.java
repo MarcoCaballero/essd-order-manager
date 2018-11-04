@@ -23,26 +23,36 @@ public class OrderService {
                               .orElse(new OrderEntity(" 404 - Not Found"));
     }
 
-    public OrderEntity addOrder(String title, List<String> items) {
+    public void addOrder(String title, List<String> items) {
         OrderEntity order = new OrderEntity(title);
 
         order.setItems(items.stream()
                             .map(ItemEntity::new)
                             .collect(Collectors.toList()));
 
-        return orderRepository.save(order);
+        orderRepository.save(order);
     }
 
-    public OrderEntity updateOrder(long orderId, String orderTitle, Map<Long, List<String>> data) {
-        OrderEntity order = orderRepository.getOne(orderId);
-        
-        updateExistingItems(order, data);
-        
-        insertNewItems(order, data);
-        
-        order.setTitle(orderTitle);
+    public void updateOrder(long orderId, String orderTitle, Map<Long, List<String>> data) {
+        orderRepository.findById(orderId).ifPresent(order -> {
 
-        return orderRepository.save(order);
+            updateExistingItems(order, data);
+        
+            insertNewItems(order, data);
+            
+            order.setTitle(orderTitle);
+
+            orderRepository.save(order);
+        });
+    }
+
+    public void updateOrder(long orderId, long itemId, boolean status) {
+        orderRepository.findById(orderId).ifPresent(order -> {
+
+            order.setItemChecked(itemId, status);
+
+            orderRepository.save(order);
+        });
     }
 
     public void deleteOrderById(long orderId) {
@@ -50,12 +60,12 @@ public class OrderService {
             .ifPresent(order -> orderRepository.delete(order));
     }
 
-    public OrderEntity deleteItemById(long orderId, long itemId) {
-        OrderEntity order = orderRepository.getOne(orderId);
-        
-        order.deleteItemById(itemId);
-
-        return orderRepository.save(order);
+    public void deleteItemById(long orderId, long itemId) {
+        orderRepository.findById(orderId)
+            .ifPresent(order -> {
+                order.deleteItemById(itemId);
+                orderRepository.save(order);
+            });
     }
 
     private void updateExistingItems(OrderEntity order, Map<Long, List<String>> data) {

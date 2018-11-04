@@ -1,4 +1,20 @@
-var COMMON_FUNCS = COMMON_FUNCS || (function() {
+var COMMON_FUNCS = COMMON_FUNCS || (() => {
+
+    let alertCounter = 0;
+
+    alert = (itemId, status) => {
+        return ` <div id="alert_${alertCounter}" class="alert alert-success" role="alert">
+                        You have ${status ? 'checked': 'unchecked'} the item with ID: ${itemId}
+                        <button type="button" class="close ml-2" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>`
+    }
+
+    getAllElementsWithSelector = (cssClass) => {
+        return document.querySelectorAll(`${cssClass}`);
+    }
+
     scrollTo = (path, options = { speed: 1000, easing: 'easeOutCubic' }) => {
         document.querySelector(path).scrollIntoView({
             behavior: 'smooth'
@@ -13,10 +29,42 @@ var COMMON_FUNCS = COMMON_FUNCS || (function() {
         $(`#${elementID}`).addClass(`animated ${animationTarget}`);
     }
 
+    showModal = (elementID) => {
+        $(`#${elementID}`).modal('show');
+    }
+
+    hideModal = (elementID) => {
+        $(`#${elementID}`).modal('hide');
+    }
+
+    toggleCrossText = (selector, status) => {
+        $(selector).attr('crossed', status);
+    }
+
+    triggerAlert = (itemId, status) => {
+        alertCounter++;
+
+        $(alert(itemId,status)).insertAfter($('#navDetail'));
+    
+        $(`#alert_${alertCounter}`).css('top', `${(window.innerHeight - (70*alertCounter))}px`);
+        $(`#alert_${alertCounter}`).css('left', `${(window.innerWidth/3)}px`);
+    
+        setTimeout(() => {
+            $(`#alert_${alertCounter}`).remove();
+            alertCounter--;
+        }, 3000);
+        
+    }
+    
     return {
-        scrollTo,
+        getAllElementsWithSelector,
+        toggleCrossText,
         removeCssClass,
-        animateObject
+        animateObject,
+        triggerAlert,
+        showModal,
+        hideModal,
+        scrollTo
     };
 })();
 

@@ -21,6 +21,11 @@ header,
     margin-right: 0em !important;
 }
 
+.alert {
+    position: fixed!important;
+    z-index: 2000!important;
+}
+
 .view-small {
     min-height: 100% !important;
 }

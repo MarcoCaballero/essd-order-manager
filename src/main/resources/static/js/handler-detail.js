@@ -12,10 +12,37 @@ deleteOrderById = (orderId) => {
     }).then(window.location.replace(`${URL_BASE}`));
 }
 
- checkDeletion = () => {
-    $('#orderDeletionModal').modal('show');
+checkDeletion = () => {
+    COMMON_FUNCS.showModal('orderDeletionModal');
 }
 
 closeModal = () => {
-    $('#orderDeletionModal').modal('hide');
+    COMMON_FUNCS.hideModal('orderDeletionModal');
+}
+
+toggleCheck = (DOMelem, orderId, itemId) => {
+    let label = `#label_check_${itemId}`;
+    let status = DOMelem.checked;
+    
+    COMMON_FUNCS.toggleCrossText(label, status);
+
+    fetch(`${URL_BASE}${orderId}/check/${itemId}`, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify({checked: status})
+    });
+
+    COMMON_FUNCS.triggerAlert(itemId, status);
+}
+
+init = () => {
+   var elems =  COMMON_FUNCS.getAllElementsWithSelector('.custom-control-input');
+   elems.forEach(elem => {
+       if(elem.value == "true") {
+           elem.checked = true;
+           document.getElementById(`label_${elem.id}`).setAttribute('crossed', true);
+       }
+    });
 }

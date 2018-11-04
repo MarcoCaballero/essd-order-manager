@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -60,6 +61,20 @@ public class OrderManagerController {
 				.collect(Collectors.groupingBy(Pair::getValue0, Collectors.mapping(Pair::getValue1, Collectors.toList())));
 
 		orderService.updateOrder(orderId, orderTitle, itemsMap);
+
+		return REDIRECT_ORDER_ID + String.valueOf(orderId);
+	}
+
+	@PostMapping("/order/{orderId}/check/{itemId}")
+	public String updateOrder(@PathVariable long orderId,
+							  @PathVariable long itemId,
+							  @RequestBody Map<String, String> payload) {
+
+		boolean status = Boolean.valueOf(payload.get("checked"));	
+							
+		logger.info("Updating Order with ID: {}, checked: {}", orderId, status);
+
+		orderService.updateOrder(orderId, itemId, status);
 
 		return REDIRECT_ORDER_ID + String.valueOf(orderId);
 	}

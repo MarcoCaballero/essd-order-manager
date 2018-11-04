@@ -2,9 +2,16 @@
     <div class="navbar-brand" href="#">
         MSC - ESSD
         <br>
-        <a class="back-button" href="/order-manager/orders" data-toggle="tooltip-secondary-scroll-2-inside" data-placement="bottom" title="Back Home">
+        {{#order}}  
+        <a class="back-button" href="/order-manager/order/{{id}}" data-toggle="tooltip-secondary-scroll-2-inside" data-placement="bottom" title="Back">
             <i class="fa fa-lg fa-angle-left" aria-hidden="true"></i>
         </a>
+        {{/order}}
+        {{^order}}  
+            <a class="back-button" href="/order-manager/orders" data-toggle="tooltip-secondary-scroll-2-inside" data-placement="bottom" title="Back">
+                <i class="fa fa-lg fa-angle-left" aria-hidden="true"></i>
+            </a>
+        {{/order}}
     </div>
     <div class="avatar ml-auto white">
         <img src="https://pbs.twimg.com/profile_images/1051588814274224129/4X-41oJc_400x400.jpg" alt="marco caballero" class="avatar-mini img-fluid z-depth-1 rounded-circle">

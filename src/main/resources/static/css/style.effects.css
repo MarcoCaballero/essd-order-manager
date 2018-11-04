@@ -3,7 +3,7 @@
     color: #fff!important;
     background-color: #4285f4!important;
 }
-
+/* 
 .btn-secondary:focus,
 .btn-secondary:active,
 .btn-secondary.active,
@@ -11,7 +11,7 @@
     border: 2px solid #d86565!important;
     background-color: #fff !important;
     color: #d86565 !important;
-}
+} */
 
 .tooltip.tooltip-primary .tooltip-inner {
     border: 2px solid #4285f4 !important;
@@ -47,4 +47,12 @@
 
 .tooltip.tooltip-secondary-scroll-2-inside {
     top: -13.4em !important;
+}
+
+[crossed=true] {
+    text-decoration: line-through !important;
+}
+
+[crossed=false] {
+    text-decoration: none !important;
 }

@@ -18,7 +18,7 @@ public class Application {
 		return args -> {
 			OrderEntity order1 = new OrderEntity("House Order");
 			order1.setItems(Arrays.asList(
-									new ItemEntity("Fruit"),
+									new ItemEntity("Fruit", true),
 									new ItemEntity("Milk")));
 									
 			orderRepository.save(order1);

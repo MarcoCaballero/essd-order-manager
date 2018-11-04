@@ -8,13 +8,20 @@ public class ItemEntity {
 
 	private long id;
 	private String name;
+	private boolean checked;
 
 	public ItemEntity() {
-		this("Default_Name");
+		this("default", false);
 	}
 
+	
 	public ItemEntity(String name) {
+		this(name, false);
+	}
+
+	public ItemEntity(String name, boolean checked) {
 		this.name = name;
+		this.checked = checked;
 	}
 
 	@Id
@@ -35,8 +42,16 @@ public class ItemEntity {
 		this.name = name;
 	}
 
+	public boolean getChecked() {
+		return checked;
+	}
+
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
+
 	@Override
 	public String toString() {
-		return "Item [id=" + id + ", name=" + name + "]";
+		return "Item [id=" + id + ", name=" + name + ", checked=" + checked + " ]";
 	}
 }
