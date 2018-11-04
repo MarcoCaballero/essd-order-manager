@@ -65,9 +65,20 @@ public class OrderManagerController {
 	}
 
 	@DeleteMapping("/order/{orderId}/item/{itemId}")
-	public ResponseEntity deleteItem(@PathVariable long orderId, @PathVariable long itemId) {
+	public void deleteItem(@PathVariable long orderId, @PathVariable long itemId) {
+		
+		logger.info("Updating Order with ID: {} delete item {}", orderId, itemId);
+		
 		orderService.deleteItemById(orderId, itemId);
 
-		return ResponseEntity.ok().build();
+	}
+
+	@DeleteMapping("/order/{orderId}")
+	public void deleteOrder(@PathVariable long orderId) {
+		
+		logger.info("Updating Order with ID: {} deleting...", orderId);
+		
+		orderService.deleteOrderById(orderId);
+
 	}
 }

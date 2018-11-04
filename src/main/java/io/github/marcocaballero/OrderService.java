@@ -36,19 +36,18 @@ public class OrderService {
     public OrderEntity updateOrder(long orderId, String orderTitle, Map<Long, List<String>> data) {
         OrderEntity order = orderRepository.getOne(orderId);
         
-        order.getItems()
-                .parallelStream()
-                .filter(item -> data.containsKey(item.getId()))
-                .forEach(item -> {
-                    String value = data.get(item.getId()).get(NEW_ITEMS_KEY);
-                    item.setName(value);
-                });
+        updateExistingItems(order, data);
         
-        order.addItems(data.get(Long.valueOf(NEW_ITEMS_KEY)));
+        insertNewItems(order, data);
         
         order.setTitle(orderTitle);
 
         return orderRepository.save(order);
+    }
+
+    public void deleteOrderById(long orderId) {
+        orderRepository.findById(orderId)
+            .ifPresent(order -> orderRepository.delete(order));
     }
 
     public OrderEntity deleteItemById(long orderId, long itemId) {
@@ -57,5 +56,21 @@ public class OrderService {
         order.deleteItemById(itemId);
 
         return orderRepository.save(order);
+    }
+
+    private void updateExistingItems(OrderEntity order, Map<Long, List<String>> data) {
+        order.getItems()
+                .parallelStream()
+                .filter(item -> data.containsKey(item.getId()))
+                .forEach(item -> {
+                    String value = data.get(item.getId()).get(NEW_ITEMS_KEY);
+                    item.setName(value);
+                });
+    }
+
+    private void insertNewItems(OrderEntity order, Map<Long, List<String>> data) {
+        final List<String> newItems = data.get(Long.valueOf(NEW_ITEMS_KEY));
+        if (newItems != null)
+            order.addItems(newItems);
     }
 }
